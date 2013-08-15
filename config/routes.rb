@@ -3,7 +3,7 @@ TodoList::Application.routes.draw do
   # first created -> highest priority.
   resources :list
   
-  get "/minha-rota" => "list#index"
+  #get "/minha-rota" => "list#index"
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
