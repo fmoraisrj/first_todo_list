@@ -2,8 +2,17 @@ class ListController < ApplicationController
 	def new
 	end
 
-	def show 
+	def edit
 		@list = List.find(params[:id])
+	end
+
+	def show
+	begin 
+		@list = List.find(params[:id])
+	rescue
+			redirect_to list_index_path
+	end
+
 	end
 
 	def index
@@ -20,17 +29,19 @@ class ListController < ApplicationController
 		else
 			render :new
 		end
-
-	#  if @post.save
-  #   redirect_to @post
-  # else
-  #   render 'new'
-  # end
-	#redirect_to  action: 'show', id: @list.id
-
-    
 	end
- 
+ 	
+	def update
+	  @list = List.find(params[:id])
+	 	@list.update(params[:post].permit(:name_list, :item1, :item2, :item3 ))
+
+	  if @list.persisted?
+	    redirect_to @list
+	  else	
+	    render :edit
+	  end
+	end
+
   def list_params
     params.require(:list).permit(
     	:name_list,
