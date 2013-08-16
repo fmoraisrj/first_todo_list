@@ -1,1 +1,27 @@
-Ola Mundo
+ <h1>Listing lists</h1>
+ <%= link_to "My blog", controller: "list"%> 
+ <%= link_to '| New list', new_list_path %>
+<table border = "2">
+  <tr>
+    <th>Name list</th>
+    <th>item 1</th>
+    <th>item 2</th>
+    <th>item 3</th>
+  </tr>
+ 
+  <% @lists.each do |list| %>
+    <tr>
+      <td><%= list.name_list %></td>
+      <td><%= list.item1 %></td>
+      <td><%= list.item2 %></td>
+
+      <td><%= list.item3 %></td>
+
+    </tr>
+  <% end %>
+
+</table>
+ <!-- Lista completa
+      <%= link_to "lombra", list_index_path %> -->
+
+      

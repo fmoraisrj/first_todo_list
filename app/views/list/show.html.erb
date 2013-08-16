@@ -1,1 +1,14 @@
-<%= debug @list%>
+<p>
+  <strong>Name list:</strong>
+  <%= @list.name_list %>
+</p>
+ 
+<p>
+  <strong>Itens:</strong><br><br>
+
+  <%= @list.item1 %><br>
+  <%= @list.item2 %><br>
+  <%= @list.item3 %><br>
+</p>
+<br>
+<%= link_to 'Back', list_index_path %>
