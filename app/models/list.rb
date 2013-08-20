@@ -7,8 +7,7 @@ class List
   field :item2, type: String
   field :item3, type: String
 
-  validates :name_list, presence: true
-  validates :name_list, length: { minimum: 3 }
+  validates :name_list, presence: true, length: { minimum: 3 }
 end
 
 

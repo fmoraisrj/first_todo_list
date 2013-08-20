@@ -3,6 +3,10 @@ source 'https://rubygems.org'
 gem 'rails',             '3.2.13'
 gem 'strong_parameters', '0.2.1'
 gem "mongoid",            "~> 3.0.0"
+group :development, :test do
+  gem 'rspec-rails', '~> 2.0'
+end
+
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
