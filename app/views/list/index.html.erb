@@ -19,7 +19,8 @@
       <td><%= list.item2 %></td>
       <td><%= list.item3 %></td>
       <td><%= link_to 'Show', list %></td>
-    <td><%= link_to 'Edit', edit_list_path(post) %></td>
+      <td><%= link_to 'Edit', edit_list_path(list) %></td>
+      <td><%= link_to 'Destroy', list, :confirm => 'Are you sure?', :method => :delete %></td>
     </tr>
   <% end %>
 

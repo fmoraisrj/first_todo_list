@@ -7,6 +7,13 @@ class ListController < ApplicationController
 		@list = List.find(params[:id])
 	end
 
+	def destroy
+		@list = List.find(params[:id])
+		@list.destroy
+
+		redirect_to list_index_path
+	end
+
 	def show
 		begin 
 			@list = List.find(params[:id])
