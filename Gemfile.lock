@@ -39,10 +39,18 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.6.3)
+    columnize (0.3.6)
     compass (0.12.2)
       chunky_png (~> 1.2)
       fssm (>= 0.2.7)
       sass (~> 3.1)
+    database_cleaner (1.1.1)
+    debugger (1.6.1)
+      columnize (>= 0.3.1)
+      debugger-linecache (~> 1.2.0)
+      debugger-ruby_core_source (~> 1.2.3)
+    debugger-linecache (1.2.0)
+    debugger-ruby_core_source (1.2.3)
     devise (3.0.2)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.1)
@@ -64,9 +72,9 @@ GEM
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     mime-types (1.23)
-    mongoid (3.0.23)
-      activemodel (~> 3.1)
-      moped (~> 1.2)
+    mongoid (3.1.4)
+      activemodel (~> 3.2)
+      moped (~> 1.4)
       origin (~> 1.0)
       tzinfo (~> 0.3.22)
     moped (1.5.1)
@@ -146,9 +154,11 @@ PLATFORMS
 DEPENDENCIES
   coffee-rails (~> 3.2.1)
   compass (~> 0.12.2)
+  database_cleaner
+  debugger (~> 1.6.1)
   devise (~> 3.0.2)
   jquery-rails
-  mongoid (~> 3.0.0)
+  mongoid
   rails (= 3.2.13)
   rspec (~> 2.14.1)
   rspec-rails (~> 2.0)

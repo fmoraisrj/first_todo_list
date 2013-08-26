@@ -12,8 +12,13 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-
-<%= yield %>
-
+  <div class="container">
+    <header>
+      <h1><%= link_to "TodoList", root_path %></h1>
+    </header>
+    <div class="content">
+      <%= yield %>
+    </div>
+  </div>
 </body>
 </html>

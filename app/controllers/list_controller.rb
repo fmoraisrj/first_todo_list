@@ -23,7 +23,8 @@ class ListController < ApplicationController
 	end
 
 	def index
-		@lists = List.all
+		@lists = List.all.to_a
+
 	end
 
 	def create 
