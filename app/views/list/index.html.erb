@@ -4,6 +4,16 @@
 
  <%= link_to "My lists"%> 
  <%= link_to '| New list', new_list_path %>
+
+ <%- flash.each do |key, msg| -%>
+  <div id="<%= key %>">
+    <p style="float:right;"><%= link_to_function 'X', "Effect.Fade('#{key}')" %></p>
+    <p><%= msg %></p>
+    <div class="clear"></div>
+  </div>
+<%- end -%>
+
+
 <table border = "2">
   <tr>
     <th>Name list</th>
