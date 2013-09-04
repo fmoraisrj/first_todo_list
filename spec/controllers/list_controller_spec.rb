@@ -4,7 +4,6 @@ require "spec_helper"
 describe ListController do   
   #let é usado para me criar uma espcécie de variável que executará o que está
   #lá dentro uma vez e guarda pra sempre naquele alias(variável)
-  
 
   let(:id) { "1" }
 
@@ -45,18 +44,6 @@ describe ListController do
     end
 
     it "deveria renderizar a tela de criar uma lista nova" do
-      get :new
-      response.should render_template("new")
-    end
-  end
-
-  describe "GET #create" do 
-    xit "deveria salvar uma lista nova" do
-      get :create
-      assigns(:list).should be_new_record
-    end
-
-    it "deveria redirecionar para a tela de criar uma lista nova" do
       get :new
       response.should render_template("new")
     end
@@ -114,7 +101,6 @@ describe ListController do
     end
   end
 
-
   describe "GET #show" do
     it "deveria mostrar a lista indicada" do
       get :show, id: new_list.id
@@ -133,43 +119,86 @@ describe ListController do
      response.status.should be == 302
      #response.should redirect_to list_index_path
    end
- end
+  end
 
- describe "PUT #update"do
-    let :item1 do
-        "updated_item"
+  describe "POST #create" do 
+    before do
+      post :create, list: { name_list: "my_new_list", item1: "my_item1", item2: "my_item2", item3: "my_item3" }
+    end
+
+    context "atributos válidos" do
+      it "deveria salvar uma lista nova" do        
+        assigns(:list).name_list.should be == "my_new_list"
       end
 
-   before do
-         #save o new_list no banco
-        new_list.save.should be_true
-        #verifica se o item1 tem o valor original
-        new_list.item1.should eql "my_item1"
-        #Verifica quantas listas existem no banco
-        List.should have(1).item
-        #chama o update com o novo item1 == "updated_item"
-        put :update, id: new_list.id, list: { item1: item1 }
+      xit "deveria redirecionar para a tela de criar uma lista nova" do
+        #response.status.should be == 200
+        response.should render_template("new")
+      end  
+    end
+
+    context "atributos inválidos" do
+      
+    end
+    
+  end
+
+  describe "PUT #update"do
+    before do
+      #save o new_list no banco
+      new_list.save.should be_true
+      #verifica se o item1 tem o valor original
+      new_list.name_list.should eql "my_new_list"
+      #Verifica quantas listas existem no banco
+      List.should have(1).item
     end
 
     context "atributos válidos" do 
+      let :list_name do
+        "updated_name"
+      end
+
+      before do
+        #chama o update com o novo item1 == "updated_item"
+        put :update, id: new_list.id, list: { name_list: list_name }
+      end
+
       it "deveria atualizar a lista indicada" do 
         #recarrega o new_list para pegar a atualização do item1 e verifica se foi realmente alterado
-        new_list.reload.item1.should eql item1
+        new_list.reload.name_list.should eql list_name
         #Verifica se não foi salvo uma nova lista ao invés de atualizar o new_list
         List.should have(1).item
       end 
 
       it "deveria redirecionar :show template" do
-        response.status.should be == 302
+        #response.status.should be == 302
         response.should redirect_to(:action => :show, :id => new_list.id)
+      end
+
+      it "deveria mostrar a mensagem flash de sucesso" do
+        flash[:notice].should == 'Lista atualizada com sucesso'
       end
     end
 
     context "atributos inválidos" do
+      let :wrong_list_name do
+        nil
+      end
+
+      before do
+        #chama o update com o novo item1 == "updated_item"
+        put :update, id: new_list.id, list: { name_list: wrong_list_name }
+      end
+
       it "deveria renderizar o template de edit" do
         response.status.should be == 200
-        response.should render :edit
+        response.should render_template :edit
       end      
+
+      it "deveria mostrar a mensagem flash de erro" do
+          flash[:error].should ==  'Não foi possível atualizar a lista'
+      end
     end
   end
+
 end

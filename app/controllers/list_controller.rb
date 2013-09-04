@@ -33,7 +33,7 @@ class ListController < ApplicationController
 	end
 
 	def create 
-		 # render text: params[:list].inspect
+		# render text: params[:list].inspect
 		#List.create(name_list:"Things to do", item1:"1", item2:"2", item3:"3")
 		@list = List.create(list_params)
 
