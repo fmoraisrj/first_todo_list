@@ -140,6 +140,7 @@ describe ListController do
       let :item1 do
         "updated_item"
       end
+
       before do
          #save o new_list no banco
         new_list.save.should be_true
@@ -163,6 +164,10 @@ describe ListController do
         response.status.should be == 302
         response.should redirect_to(:action => :show, :id => new_list.id)
       end
+    end
+
+    context "atributos inválidos" do
+      
     end
   end
 end

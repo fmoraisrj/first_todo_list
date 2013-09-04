@@ -45,15 +45,14 @@ class ListController < ApplicationController
 			render :new			
 		end
 	end
-	
+
 	def update
 		@list = List.find(params[:id])
-		@list.update_attributes!(params[:list].permit(:name_list, :item1, :item2, :item3 ))
-
-		if @list.persisted?
+		updated = @list.update_attributes(params[:list].permit(:name_list, :item1, :item2, :item3 ))
+		if updated
 			flash[:notice] = 'Lista atualizada com sucesso'
 			redirect_to @list
-		else	
+		else
 			flash.now[:error] =  'Não foi possível atualizar a lista'
 			render :edit
 		end
