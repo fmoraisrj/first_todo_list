@@ -151,7 +151,7 @@ describe ListController do
         put :update, id: new_list.id, list: { item1: item1 }
       end
 
-      it "deveria atualizar a lista indicada" do \
+      it "deveria atualizar a lista indicada" do 
         #recarrega o new_list para pegar a atualização do item1 e verifica se foi realmente alterado
         new_list.reload.item1.should eql item1
         #Verifica se não foi salvo uma nova lista ao invés de atualizar o new_list
@@ -161,7 +161,7 @@ describe ListController do
       it "deveria renderizar :show template" do
         put :update, id: new_list.id, list: { item1: item1 }
         response.status.should be == 302
-        response.should redirect_to(:show)
+        response.should redirect_to(:action => :show, :id => new_list.id)
       end
     end
   end
