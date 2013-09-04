@@ -136,12 +136,11 @@ describe ListController do
  end
 
  describe "PUT #update"do
-    context "atributos válidos" do 
-      let :item1 do
+    let :item1 do
         "updated_item"
       end
 
-      before do
+   before do
          #save o new_list no banco
         new_list.save.should be_true
         #verifica se o item1 tem o valor original
@@ -150,8 +149,9 @@ describe ListController do
         List.should have(1).item
         #chama o update com o novo item1 == "updated_item"
         put :update, id: new_list.id, list: { item1: item1 }
-      end
+    end
 
+    context "atributos válidos" do 
       it "deveria atualizar a lista indicada" do 
         #recarrega o new_list para pegar a atualização do item1 e verifica se foi realmente alterado
         new_list.reload.item1.should eql item1
@@ -159,15 +159,17 @@ describe ListController do
         List.should have(1).item
       end 
 
-      it "deveria renderizar :show template" do
-        put :update, id: new_list.id, list: { item1: item1 }
+      it "deveria redirecionar :show template" do
         response.status.should be == 302
         response.should redirect_to(:action => :show, :id => new_list.id)
       end
     end
 
     context "atributos inválidos" do
-      
+      it "deveria renderizar o template de edit" do
+        response.status.should be == 200
+        response.should render :edit
+      end      
     end
   end
 end
