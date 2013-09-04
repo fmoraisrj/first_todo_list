@@ -4,14 +4,12 @@ require "spec_helper"
 describe ListController do   
   #let é usado para me criar uma espcécie de variável que executará o que está
   #lá dentro uma vez e guarda pra sempre naquele alias(variável)
-  let! :my_list do
-    List.create(name_list: "eede")
-  end
+  
 
   let(:id) { "1" }
 
-  let! :new_list do
-    List.new {name_list:"my_new_list", item1: "my_item1", item2: "my_item2", item3: "my_item3"}
+  let :new_list do
+    List.new({ name_list: "my_new_list", item1: "my_item1", item2: "my_item2", item3: "my_item3" })
   end
 
   let(:wrong_id) { "a23b" }
@@ -22,12 +20,16 @@ describe ListController do
   end
 
   describe "GET #index" do
+    before  do
+      @my_list = List.create(name_list: "eede")
+    end
+
     it "deveria criar uma lista" do
       # O get funciona parecido com o send onde o parametro passado
       #execeuta  o método(action) indicado no simbôlo
       get :index
       # O assigns pega a variável indicada no parâmetro da classe do teste.
-      assigns(:lists).should == [my_list]
+      assigns(:lists).should == [@my_list]
     end
 
     it "deveria renderizar a lista de lists" do
@@ -49,7 +51,7 @@ describe ListController do
   end
 
   describe "GET #create" do 
-    it "deveria salvar uma lista nova" do
+    xit "deveria salvar uma lista nova" do
       get :create
       assigns(:list).should be_new_record
     end
@@ -134,36 +136,33 @@ describe ListController do
  end
 
  describe "PUT #update"do
+    context "atributos válidos" do 
+      let :item1 do
+        "updated_item"
+      end
+      before do
+         #save o new_list no banco
+        new_list.save.should be_true
+        #verifica se o item1 tem o valor original
+        new_list.item1.should eql "my_item1"
+        #Verifica quantas listas existem no banco
+        List.should have(1).item
+        #chama o update com o novo item1 == "updated_item"
+        put :update, id: new_list.id, list: { item1: item1 }
+      end
 
- context "valid attributes" do 
-  it "located the requested @contact" do 
-    put :update, id: @contact, contact: Factory.attributes_for(:contact) 
-    assigns(:contact).should eq(@contact) 
-  end 
+      it "deveria atualizar a lista indicada" do \
+        #recarrega o new_list para pegar a atualização do item1 e verifica se foi realmente alterado
+        new_list.reload.item1.should eql item1
+        #Verifica se não foi salvo uma nova lista ao invés de atualizar o new_list
+        List.should have(1).item
+      end 
 
-  it "changes @contact's attributes" do 
-    put :update, id: @contact, contact: Factory.attributes_for(:contact, firstname: "Larry", lastname: "Smith") 
-    @contact.reload 
-    @contact.firstname.should eq("Larry") 
-    @contact.lastname.should eq("Smith") 
+      it "deveria renderizar :show template" do
+        put :update, id: new_list.id, list: { item1: item1 }
+        response.status.should be == 302
+        response.should redirect_to(:show)
+      end
+    end
   end
-
-  it "redirects to the updated contact" do 
-    put :update, id: @contact, contact: Factory.attributes_for(:contact) 
-    response.should redirect_to @contact 
-  end
-end
-
-  it "deveria atualizar a lista indicada" do
-    put :update, id: new_list.id
-    assigns(:list).should eql(new_list)
-  end
-
-  it "deveria renderizar :edit(update) template" do
-    put :update, id: new_list.id
-    response.status.should be == 200
-    response.should render_template(:edit)
-  end
-end
-
 end
