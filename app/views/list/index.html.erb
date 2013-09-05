@@ -1,9 +1,4 @@
- <h1>Listing lists</h1>
-
-
-
- <%= link_to "My lists"%> 
- <%= link_to '| New list', new_list_path %>
+ 
 
  <%- flash.each do |key, msg| -%>
   <div id="<%= key %>">
@@ -14,7 +9,7 @@
 <%- end -%>
 
 
-<table border = "2">
+<table class="table table-hover table-condensed azul" border = "2">
   <tr>
     <th>Name list</th>
     <th>item 1</th>

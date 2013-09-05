@@ -122,25 +122,42 @@ describe ListController do
   end
 
   describe "POST #create" do 
-    before do
-      post :create, list: { name_list: "my_new_list", item1: "my_item1", item2: "my_item2", item3: "my_item3" }
-    end
+
 
     context "atributos válidos" do
+      before do
+        post :create, list: { name_list: "my_new_list", item1: "my_item1", item2: "my_item2", item3: "my_item3" }
+      end
+
       it "deveria salvar uma lista nova" do        
         assigns(:list).name_list.should be == "my_new_list"
       end
 
-      xit "deveria redirecionar para a tela de criar uma lista nova" do
+      it "deveria redirecionar para a tela de criar uma lista nova" do
         #response.status.should be == 200
-        response.should render_template("new")
+        response.should redirect_to List.last
       end  
     end
 
     context "atributos inválidos" do
-      
-    end
-    
+      let :wrong_list_name do
+        nil
+      end
+
+      before do
+        #chama o update com o novo item1 == "updated_item"
+        post :create, id: new_list.id, list: { name_list: wrong_list_name }
+      end
+
+      it "redirecionar para a página de nova lista novamente" do
+        response.status.should == 200
+        response.should render_template :new
+      end
+
+      it "deveria mostrar a mensagem flash de erro" do
+          flash[:error].should ==  'Não foi possível criar a lista'
+      end
+    end  
   end
 
   describe "PUT #update"do
