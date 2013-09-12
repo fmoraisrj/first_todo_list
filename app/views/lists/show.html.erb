@@ -1,0 +1,26 @@
+<p><%= flash[:notice] %></p>
+
+<p>
+  <strong>Name list:</strong>
+  <%= @list.name_list %>
+</p>
+ 
+<p>
+  <strong>Tasks:</strong><br><br>
+  <ul>
+    <%= render partial: "shared/task", collection: @list.tasks %>
+  </ul>
+
+<% @list.tasks.each do |task| %>
+  <ul>  
+    <%= task.status %>
+    <%= task.body %>
+  </ul>
+<% end %>
+
+</p>
+<br>
+<%= link_to 'Back', lists_path %>
+| <%= link_to 'Edit', edit_list_path(@list) %> 
+<!-- O link_to só aceita paths como parâmetros e caso os paths precisem de parâmetros devem ser passados como abaixo separados por vírgulas -->
+| <%= link_to 'New Task', new_list_task_path(list_id: @list.id) %>

@@ -1,13 +1,17 @@
 TodoList::Application.routes.draw do
   # The priority is based upon order of creation:
   # first created -> highest priority.
-  resources :list
+  resources :lists do 
+    # a task dentro da lista significa que não existe uma task que não pertença a auma lista.
+    #Todos os links de task ficaram sob domínio das listas ex.: /lists/:list_id/tasks/new
+    resources :tasks, except: [:show, :index] 
+  end
   
   #get "/minha-rota" => "list#index"
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  root to: 'item#itens'
+  root to: 'lists#index'
 
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'

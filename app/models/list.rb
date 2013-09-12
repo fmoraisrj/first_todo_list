@@ -4,7 +4,8 @@ class List
   
   field :name_list, type: String
   #has_many :items
-  
+  has_many :tasks, autosave: true
+
   field :item1, type: String
   field :item2, type: String
   field :item3, type: String

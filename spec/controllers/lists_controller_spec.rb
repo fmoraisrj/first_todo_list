@@ -1,7 +1,7 @@
 
 require "spec_helper"
 
-describe ListController do   
+describe ListsController do   
   #let é usado para me criar uma espcécie de variável que executará o que está
   #lá dentro uma vez e guarda pra sempre naquele alias(variável)
 
@@ -97,7 +97,7 @@ describe ListController do
     it "deveria redirecionar para a tela com a lista" do
       List.stub(:find).and_return(lista)
       delete :destroy, id: id
-      response.should redirect_to(list_index_path)
+      response.should redirect_to(lists_path)
     end
   end
 
@@ -117,16 +117,18 @@ describe ListController do
      List.unstub(:find)
      get :show, id: wrong_id
      response.status.should be == 302
-     #response.should redirect_to list_index_path
+     #response.should redirect_to lists_path
    end
   end
 
   describe "POST #create" do 
-
-
     context "atributos válidos" do
       before do
-        post :create, list: { name_list: "my_new_list", item1: "my_item1", item2: "my_item2", item3: "my_item3" }
+        post :create, list: { name_list: "my_new_list", 
+                              item1: "my_item1", 
+                              item2: "my_item2", 
+                              item3: "my_item3" 
+                            }
       end
 
       it "deveria salvar uma lista nova" do        

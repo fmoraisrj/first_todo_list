@@ -1,0 +1,37 @@
+ 
+
+<%- flash.each do |key, msg| -%>
+<div id="<%= key %>">
+  <p style="float:right;"><%= link_to_function 'X', "Effect.Fade('#{key}')" %></p>
+  <p><%= msg %></p>
+  <div class="clear"></div>
+</div>
+<%- end -%>
+
+
+<table class="table  table-hover table-condensed table-bordered ">
+  <tr>
+    <th>Name list</th>
+    <th>item 1</th>
+    <th>item 2</th>
+    <th>item 3</th>
+    <th>Options</th>
+  </tr>
+
+  <% @lists.each do |list| %>
+  <tr>
+    <td><%= list.name_list %></td>
+    <td><%= list.item1 %></td>
+    <td><%= list.item2 %></td>
+    <td><%= list.item3 %></td>
+    <td>
+      <%= link_to 'Show', list %> | 
+      <%= link_to 'Edit', edit_list_path(list) %> |
+      <%= link_to 'Destroy', list, :confirm => 'Are you sure?', :method => :delete %>
+    </td>
+  </tr>
+  <% end %>
+
+</table>
+
+

@@ -1,4 +1,4 @@
-class ListController < ApplicationController
+class ListsController < ApplicationController
 	def new
 		@list = List.new
 	end
@@ -14,7 +14,7 @@ class ListController < ApplicationController
 	def destroy
 		@list = List.find(params[:id])
 		@list.destroy
-		redirect_to list_index_path
+		redirect_to lists_path
 	rescue Mongoid::Errors::DocumentNotFound
 		flash[:error] = "Lista não encontrada"
 		redirect_to list_path
@@ -24,12 +24,11 @@ class ListController < ApplicationController
 	def show
 		@list = List.find(params[:id])
 	rescue StandardError
-		redirect_to list_index_path
+		redirect_to lists_path
 	end
 
 	def index
 		@lists = List.all.to_a
-
 	end
 
 	def create 
