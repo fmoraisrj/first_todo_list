@@ -16,12 +16,10 @@
 <% end %>
 
 <p>
-  <!-- <%= f.label :status %> -->
   <%= hidden_field_tag "task[list_id]", @list.id %>
+  
   <%= f.check_box :status %>
-
-  <!-- <%= f.label :body %> -->
-  <%= f.text_field :body %>
+  <%= f.text_field :body, placeholder: "Tell me your task" %>
 </p>
 
 <p>

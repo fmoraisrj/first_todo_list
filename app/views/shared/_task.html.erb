@@ -1,1 +1,9 @@
-<li>Task: <%= task %></li>
+<li>
+
+  <%= check_box_tag 'status', task.status, task.status, {disabled: true} %> 
+<!-- <%= link_to edit_list_task_path(@list, @task) do  %>
+      Sempre que for e -->
+  <%= link_to edit_list_task_path(list_id: @list.id, id: @task.id) do  %>
+    <%= task.body %>
+  <% end %>
+</li>

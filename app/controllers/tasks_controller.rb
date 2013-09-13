@@ -1,31 +1,35 @@
 class TasksController < ApplicationController
+  before_filter :load_list, only: [:new, :edit]
+
   def new
-    #Recebe a lista de lista
-    @list = List.find params[:list_id]
     @task = Task.new
   end
 
   def edit 
+    begin
+      @task = @list.tasks.find(params[:id])  
+    rescue
+      flash.now[:error] = "Task não encontrada"
+      render :edit
+    end
   end
 
   def create
     #render text: params[:task].inspect
     # redirect_to list_path( @task.list_id )
-
     # Para acessar os atributos dos params usar símbolos como abaixo
     @task = Task.create(params[:task])
 
     if @task.persisted?
       flash[:notice] = 'task criada com sucesso'
-      redirect_to lists_path(@task.list_id) #path
+      redirect_to list_path(@task.list_id) #path
     else
       @list = List.find params[:list_id]
       @task = Task.new
       # render text: params[:task].inspect
-      # flash.now[:error] = 'Não foi psossível salvar a task'
+      flash.now[:error] = 'Não foi psossível salvar a task'
       render :new
     end
-
   end
 
 
@@ -51,5 +55,10 @@ class TasksController < ApplicationController
   end
   
   # ********** Não deve ter Show  e nem Index
+
+  def load_list 
+    
+    @list = List.find params[:list_id]
+  end
 
 end

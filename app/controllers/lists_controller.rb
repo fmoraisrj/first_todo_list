@@ -7,7 +7,8 @@ class ListsController < ApplicationController
 		begin
 			@list = List.find(params[:id])
 		rescue
-
+			flash.now[:error] = "List não encontrada"
+			render :edit
 		end
 	end
 
