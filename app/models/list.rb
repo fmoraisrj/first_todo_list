@@ -3,7 +3,7 @@ class List
   include Mongoid::Document
   
   field :name_list, type: String
-  field :date, DateTime
+  field :date, type: DateTime
   has_many :tasks, autosave: true
 
   # field :item1, type: String
