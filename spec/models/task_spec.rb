@@ -22,7 +22,7 @@ describe Task do
   it "is not valid" do
     
     task = Task.new
-    # task.list = wrong_list
+    #task.list = wrong_list
     task.status = true
 
     task.should_not be_valid    

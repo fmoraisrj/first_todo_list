@@ -23,6 +23,7 @@ class ListsController < ApplicationController
 	end
 
 	def show
+		
 		@list = List.find(params[:id])
 	rescue StandardError
 		redirect_to lists_path

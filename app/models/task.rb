@@ -6,5 +6,5 @@ class Task
   field :date, type: DateTime
   field :order, type: Integer
 
-  validates :list_id, presence: true
+  validates :list_id, :body, presence: true
 end
