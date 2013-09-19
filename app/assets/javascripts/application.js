@@ -13,3 +13,10 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
+
+$(function() {
+  $( ".sort" ).sortable({
+    placeholder: "ui-state-highlight"
+  });
+  $( ".sort" ).disableSelection();
+});

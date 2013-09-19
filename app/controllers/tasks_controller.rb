@@ -26,38 +26,39 @@ class TasksController < ApplicationController
     else
       @list = List.find params[:list_id]
       @task = Task.new
-      # render text: params[:task].inspect
       flash.now[:error] = 'Não foi psossível salvar a task'
       render :new
     end
   end
 
-
-# def create 
-#     # render text: params[:list].inspect
-#     #List.create(name_list:"Things to do", item1:"1", item2:"2", item3:"3")
-#     @list = List.create(list_params)
-
-#     if @list.persisted?
-#       flash[:notice] = 'Lista criada com sucesso'
-#       redirect_to list_path(@list.id)
-#     else
-#       flash.now[:error] =  'Não foi possível criar a lista'
-#       render :new     
-#     end
-#   end
-
-
   def update
+    @list = List.find(params[:list_id])
+    @task = @list.tasks.find(params[:id])
+
+    if @task.update_attributes(params[:task])
+      flash[:notice] = 'Task atualizada com sucesso'
+      redirect_to list_path(@task.list_id)
+    else
+      flash.now[:error] =  'Não foi possível atualizar a task'
+      render :edit
+    end
   end
 
   def destroy
+    @list = List.find(params[:list_id])
+    @task = @list.tasks.find(params[:id])
+
+    @task.destroy
+    flash[:notice] = 'Task destruída com sucesso'
+    rescue Mongoid::Errors::DocumentNotFound
+      flash[:error] = "Task não encontrada"
+    ensure
+      redirect_to list_path(@task.list_id)
   end
   
   # ********** Não deve ter Show  e nem Index
 
   def load_list 
-    
     @list = List.find params[:list_id]
   end
 

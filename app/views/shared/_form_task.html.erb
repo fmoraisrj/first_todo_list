@@ -1,0 +1,27 @@
+<%= form_for [@list, @task] do |f| %>
+<% if @task.errors.any? %>
+  <div id="errorExplanation">
+    <h2><%= pluralize(@task.errors.count, "error") %> 
+      prohibited this list from being saved:
+    </h2>
+
+    <ul>
+      <% @task.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<p>
+  <%= hidden_field_tag "task[list_id]", @list.id %>
+  <%= f.check_box :status %>
+  <%= f.text_field :body, placeholder: "Tell me your task" %>
+</p>
+
+<p>
+  <%= f.submit :Save %>
+</p>
+<% end %>
+
+<%= link_to 'Back', lists_path %>

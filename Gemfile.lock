@@ -77,6 +77,11 @@ GEM
       moped (~> 1.4)
       origin (~> 1.0)
       tzinfo (~> 0.3.22)
+    mongoid_rails_migrations (1.0.1)
+      activesupport (>= 3.2.0)
+      bundler (>= 1.0.0)
+      rails (>= 3.2.0)
+      railties (>= 3.2.0)
     moped (1.5.1)
     multi_json (1.7.9)
     origin (1.1.0)
@@ -159,6 +164,7 @@ DEPENDENCIES
   devise (~> 3.0.2)
   jquery-rails
   mongoid
+  mongoid_rails_migrations (~> 1.0.0)
   rails (= 3.2.13)
   rspec (~> 2.14.1)
   rspec-rails (~> 2.0)

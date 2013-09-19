@@ -1,5 +1,4 @@
  
-
 <%- flash.each do |key, msg| -%>
 <div id="<%= key %>">
   <p style="float:right;"><%= link_to_function 'X', "Effect.Fade('#{key}')" %></p>
@@ -7,25 +6,17 @@
   <div class="clear"></div>
 </div>
 <%- end -%>
-
-
-<table class="table  table-hover table-condensed table-bordered ">
-  <tr>
-    <th>Name list</th>
-    <th>Options</th>
-  </tr>
-
+<ul class="unstyled sort lists-container"  >
   <% @lists.each do |list| %>
-  <tr>
-    <td><%= list.name_list %></td>
-    <td>
-      <%= link_to 'Show', list_path(list) %> | 
-      <%= link_to 'Edit', edit_list_path(list) %> |
+  <li>
+    <strong><%= list.name_list  %></strong>
+    <span class="actions">
+      <%= link_to 'Show', list_path(list) %><span class="dot">&middot;</span>
+      <%= link_to 'Edit', edit_list_path(list) %><span class="dot">&middot;</span>
       <%= link_to 'Destroy', list, :confirm => 'Are you sure?', :method => :delete %>
-    </td>
-  </tr>
+    </span>
+  </li>
   <% end %>
-
-</table>
+</ul>
 
 

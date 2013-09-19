@@ -1,0 +1,74 @@
+
+body, html{
+  margin: 0.5%;
+  padding: 0%;
+}
+
+html>body .sort li { 
+  height: 1.5em; 
+  line-height: 1.2em; 
+}
+
+/* sortable */
+.ui-state-highlight { 
+  height: 1.5em; 
+  line-height: 1.2em; 
+  background: #E6F2FF;
+  border: none;
+} 
+
+.sort { 
+  list-style-type: none;
+  margin: 0; 
+  padding: 0; 
+  width: 60%; 
+}
+
+.sort li {
+  margin: 0 5px 5px 5px; 
+  padding: 5px; 
+  font-size: 1.2em; 
+  height: 1.5em;
+}
+
+.lists-container li {
+  /* efeito de transição */
+  transition: border-left ease-in-out 250ms;
+  -webkit-transition: border-left ease-in-out 250ms;
+  -moz-transition: border-left ease-in-out 250ms;
+  -o-transition: border-left ease-in-out 250ms;
+  -ms-transition: border-left ease-in-out 250ms;
+
+  border-left: 4px solid transparent;
+  border-bottom: 1px solid #f7f7f7;
+}
+
+.lists-container li .actions {
+  transition: opacity ease-in-out 250ms;
+  -webkit-transition: opacity ease-in-out 250ms;
+  -moz-transition: opacity ease-in-out 250ms;
+  -o-transition: opacity ease-in-out 250ms;
+  -ms-transition: opacity ease-in-out 250ms;
+
+  text-transform: uppercase;
+  opacity: 0;
+}
+
+.lists-container li .actions .dot {
+  padding: 0 5px;
+  display: inline-block;
+  height: 14px;
+  color: #cdcdcd;
+}
+
+.lists-container li .actions a {
+  font-size: 10px;
+}
+
+.lists-container li:hover {
+  border-left: 4px solid #6699FF;
+}
+
+.lists-container li:hover .actions {
+  opacity: 1;
+}

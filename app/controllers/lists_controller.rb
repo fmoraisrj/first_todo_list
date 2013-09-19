@@ -16,21 +16,20 @@ class ListsController < ApplicationController
 		@list = List.find(params[:id])
 		@list.destroy
 		redirect_to lists_path
-	rescue Mongoid::Errors::DocumentNotFound
-		flash[:error] = "Lista não encontrada"
-		redirect_to list_path
-		#render text: "nao testado", status: 302
+		rescue Mongoid::Errors::DocumentNotFound
+			flash[:error] = "Lista não encontrada"
+			redirect_to list_path
+			#render text: "nao testado", status: 302
 	end
 
 	def show
-		
 		@list = List.find(params[:id])
 	rescue StandardError
 		redirect_to lists_path
 	end
 
 	def index
-		@lists = List.all.to_a
+		@lists = List.all_sorted.to_a
 	end
 
 	def create 
