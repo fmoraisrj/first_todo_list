@@ -6,7 +6,7 @@
   <div class="clear"></div>
 </div>
 <%- end -%>
-<ul class="unstyled sort lists-container"  >
+<ul id="lists" class="unstyled sort lists-container"  >
   <% @lists.each do |list| %>
   <li data-id="<%= list.id %>">
     <strong><%= list.name_list  %></strong>

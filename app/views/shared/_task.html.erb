@@ -1,4 +1,4 @@
-<li>
+<li data-id="<%= task.id %>" >
   <%= check_box_tag 'status', task.status, task.status, {disabled: true} %> 
   <%# <%= link_to edit_list_task_path(@list, @task) do  %>
   <%#   Sempre que tive mais de uma parametros é bom passa-los explicitamente %>
@@ -6,5 +6,10 @@
     <%= task.body %>
   <% end %>
 
-  <%= link_to 'X', [task.list, task], :confirm => 'Are you sure?', :method => :delete, class: "destroy_task" %>
+  <%= link_to 'X', 
+      [task.list, task], 
+      :confirm => 'Are you sure?', 
+      :method => :delete, 
+      class: "destroy_task" 
+  %>
 </li>

@@ -74,8 +74,6 @@ class ListsController < ApplicationController
 	end
 
 	def reorder
-		# @lists = List.all_sorted.to_a
-		
 		@ids = params[:ids]
 		
 		@ids.each_with_index do |id, index|
@@ -84,6 +82,6 @@ class ListsController < ApplicationController
 			list.save
 		end
 		
-		render :text => "Ok" # :index
+		render text: "Ok", status: 200 # :index
 	end
 end

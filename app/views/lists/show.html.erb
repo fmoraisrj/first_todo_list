@@ -1,3 +1,4 @@
+
 <p><%= flash[:notice] %></p>
 <p>
   <strong>Name list:</strong>
@@ -5,7 +6,7 @@
 </p>
 <p>
   <strong>Tasks:</strong><br>
-  <ul class = "unstyled sort" id="tasks">
+  <ul class="unstyled sort tasks-container" id="tasks" data-list-id="<%= @list.id %>">
     <%= render partial: "shared/task", collection: @list.tasks %>
   </ul>
 </p>

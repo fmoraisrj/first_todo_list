@@ -4,11 +4,15 @@ TodoList::Application.routes.draw do
   resources :lists do 
     # a task dentro da lista significa que não existe uma task que não pertença a auma lista.
     #Todos os links de task ficaram sob domínio das listas ex.: /lists/:list_id/tasks/new
-    resources :tasks, except: [:show, :index] 
+    resources :tasks, except: [:show, :index]  do 
+      collection do 
+        post :reorder
+      end
+    end
+
     collection do 
       post :reorder
     end
-
   end
   
   #get "/minha-rota" => "list#index"

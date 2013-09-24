@@ -11,6 +11,8 @@ describe ListsController do
     List.new({ name_list: "my_new_list", item1: "my_item1", item2: "my_item2", item3: "my_item3" })
   end
 
+  
+
   let(:wrong_id) { "a23b" }
 
   before do
@@ -220,4 +222,27 @@ describe ListsController do
     end
   end
 
+  describe "POST reorder" do
+    before do
+      @l1 = List.create!(name_list: "list1", order: 1 )
+      @l2 = List.create!(name_list: "list2", order: 2 )
+      @l3 = List.create!(name_list: "list3", order: 3 )
+    end
+
+    it "deveria reordenar as listas" do
+      ids = [@l3.id, @l2.id, @l1.id]
+      post :reorder,  ids: ids 
+
+      sorted_lists = List.asc(:order).to_a
+      sorted_lists.collect{ |list| list.id }
+
+      debugger
+
+      sorted_lists[0].id.should be ids[0] 
+      sorted_lists[1].id.should be ids[1] 
+      sorted_lists[2].id.should be ids[2] 
+      response.status.should be 200
+    end
+
+  end
 end

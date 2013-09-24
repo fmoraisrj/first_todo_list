@@ -31,7 +31,7 @@ html>body .sort li {
   height: 1.5em;
 }
 
-.lists-container li {
+.lists-container li, .tasks-container li {
   /* efeito de transição */
   transition: border-left ease-in-out 250ms;
   -webkit-transition: border-left ease-in-out 250ms;
@@ -43,11 +43,15 @@ html>body .sort li {
   border-bottom: 1px solid #f7f7f7;
 }
 
-.lists-container li:active {
+.lists-container li:active, .tasks-container li:active {
   cursor: pointer;
 }
 
-.lists-container li .actions {
+.lists-container li:hover, .tasks-container li:hover {
+  border-left: 4px solid #6699FF;
+}
+
+.lists-container li .actions{
   transition: opacity ease-in-out 250ms;
   -webkit-transition: opacity ease-in-out 250ms;
   -moz-transition: opacity ease-in-out 250ms;
@@ -67,10 +71,6 @@ html>body .sort li {
 
 .lists-container li .actions a {
   font-size: 10px;
-}
-
-.lists-container li:hover {
-  border-left: 4px solid #6699FF;
 }
 
 .lists-container li:hover .actions {
