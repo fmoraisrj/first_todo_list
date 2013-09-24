@@ -24,12 +24,18 @@ class ListsController < ApplicationController
 
 	def show
 		@list = List.find(params[:id])
-	rescue StandardError
-		redirect_to lists_path
+		rescue StandardError
+			redirect_to lists_path
 	end
 
 	def index
 		@lists = List.all_sorted.to_a
+
+		respond_to do |format|
+			format.html 
+			format.xml { render xml: @lists.to_xml }
+			format.json { render json: @lists.to_json }
+		end
 	end
 
 	def create 
@@ -64,7 +70,20 @@ class ListsController < ApplicationController
 			:item1,
 			:item2,
 			:item3
-			)
+		)
 	end
 
+	def reorder
+		# @lists = List.all_sorted.to_a
+		
+		@ids = params[:ids]
+		
+		@ids.each_with_index do |id, index|
+			list = List.find(id)
+			list.order = index
+			list.save
+		end
+		
+		render :text => "Ok" # :index
+	end
 end

@@ -8,7 +8,7 @@
 <%- end -%>
 <ul class="unstyled sort lists-container"  >
   <% @lists.each do |list| %>
-  <li>
+  <li data-id="<%= list.id %>">
     <strong><%= list.name_list  %></strong>
     <span class="actions">
       <%= link_to 'Show', list_path(list) %><span class="dot">&middot;</span>

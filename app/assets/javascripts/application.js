@@ -14,9 +14,38 @@
 //= require jquery_ujs
 //= require_tree .
 
+
+
+
 $(function() {
+  $( ".sort" ).sortable({
+    stop: function(event, ui) {
+      lis = $(".lists-container").find("li");
+      list_ids = [];
+      
+      for (var i = 0; i < lis.length; i++) {
+        list_ids.push($(lis[i]).data("id"));
+      }
+      
+      /* É preciso passar o token para impedir que alguém faça uma resquisição se passando por você */
+      var csrfToken = $("meta[name='csrf-token']").attr("content");
+      $.ajaxSetup({
+        headers: {
+          'X-CSRF-Token': csrfToken
+        }
+      });
+
+      $.post(
+        '/lists/reorder',  
+        {ids: list_ids},
+        function(){ alert("post") }
+      );
+    }
+  });
+
   $( ".sort" ).sortable({
     placeholder: "ui-state-highlight"
   });
+
   $( ".sort" ).disableSelection();
 });

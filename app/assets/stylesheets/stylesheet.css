@@ -43,6 +43,10 @@ html>body .sort li {
   border-bottom: 1px solid #f7f7f7;
 }
 
+.lists-container li:active {
+  cursor: pointer;
+}
+
 .lists-container li .actions {
   transition: opacity ease-in-out 250ms;
   -webkit-transition: opacity ease-in-out 250ms;
