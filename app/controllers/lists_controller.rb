@@ -19,7 +19,6 @@ class ListsController < ApplicationController
 		rescue Mongoid::Errors::DocumentNotFound
 			flash[:error] = "Lista não encontrada"
 			redirect_to list_path
-			#render text: "nao testado", status: 302
 	end
 
 	def show

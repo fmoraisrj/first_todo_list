@@ -26,7 +26,7 @@ class TasksController < ApplicationController
     else
       @list = List.find params[:list_id]
       @task = Task.new
-      flash.now[:error] = 'Não foi psossível salvar a task'
+      flash.now[:error] = 'Não foi possível salvar a task'
       render :new
     end
   end

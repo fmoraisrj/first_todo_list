@@ -14,6 +14,9 @@
 //= require jquery_ujs
 //= require_tree .
 
-
+$(function() {
+  List.sortable();
+  Task.sortable();
+});
 
 

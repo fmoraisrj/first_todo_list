@@ -51,6 +51,43 @@ describe ListsController do
     end
   end
 
+  describe "POST #create" do 
+    context "atributos válidos" do
+      before do
+        post :create, list: { name_list: "my_new_list" }
+      end
+
+      it "deveria salvar uma lista nova" do        
+        assigns(:list).name_list.should == "my_new_list"
+      end
+
+      it "deveria redirecionar para a tela de criar uma lista nova" do
+        #response.status.should be == 200
+        response.should redirect_to List.last
+      end  
+    end
+
+    context "atributos inválidos" do
+      let :wrong_list_name do
+        nil
+      end
+
+      before do
+        #chama o update com o novo item1 == "updated_item"
+        post :create, id: new_list.id, list: { name_list: wrong_list_name }
+      end
+
+      it "renderizar para a página de nova lista novamente" do
+        response.status.should == 200
+        response.should render_template :new
+      end
+
+      it "deveria mostrar a mensagem flash de erro" do
+          flash[:error].should ==  'Não foi possível criar a lista'
+      end
+    end  
+  end
+  
   describe "GET #edit" do 
     let(:list_id) { "3" }
 
@@ -123,47 +160,6 @@ describe ListsController do
    end
   end
 
-  describe "POST #create" do 
-    context "atributos válidos" do
-      before do
-        post :create, list: { name_list: "my_new_list", 
-                              item1: "my_item1", 
-                              item2: "my_item2", 
-                              item3: "my_item3" 
-                            }
-      end
-
-      it "deveria salvar uma lista nova" do        
-        assigns(:list).name_list.should be == "my_new_list"
-      end
-
-      it "deveria redirecionar para a tela de criar uma lista nova" do
-        #response.status.should be == 200
-        response.should redirect_to List.last
-      end  
-    end
-
-    context "atributos inválidos" do
-      let :wrong_list_name do
-        nil
-      end
-
-      before do
-        #chama o update com o novo item1 == "updated_item"
-        post :create, id: new_list.id, list: { name_list: wrong_list_name }
-      end
-
-      it "redirecionar para a página de nova lista novamente" do
-        response.status.should == 200
-        response.should render_template :new
-      end
-
-      it "deveria mostrar a mensagem flash de erro" do
-          flash[:error].should ==  'Não foi possível criar a lista'
-      end
-    end  
-  end
-
   describe "PUT #update"do
     before do
       #save o new_list no banco
@@ -222,11 +218,13 @@ describe ListsController do
     end
   end
 
-  describe "POST reorder" do
+  describe "POST #reorder" do
     before do
       @l1 = List.create!(name_list: "list1", order: 1 )
       @l2 = List.create!(name_list: "list2", order: 2 )
       @l3 = List.create!(name_list: "list3", order: 3 )
+
+      List.unstub(:find)
     end
 
     it "deveria reordenar as listas" do
@@ -235,13 +233,10 @@ describe ListsController do
 
       sorted_lists = List.asc(:order).to_a
       sorted_lists.collect{ |list| list.id }
-
-      debugger
-
-      sorted_lists[0].id.should be ids[0] 
-      sorted_lists[1].id.should be ids[1] 
-      sorted_lists[2].id.should be ids[2] 
-      response.status.should be 200
+      sorted_lists[0].id.to_s.should == ids[0].to_s 
+      sorted_lists[1].id.should == ids[1] 
+      sorted_lists[2].id.should == ids[2] 
+      response.status.should == 200
     end
 
   end

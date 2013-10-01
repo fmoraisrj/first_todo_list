@@ -2,36 +2,45 @@
 // # All this logic will automatically be available in application.js.
 // # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
-$(function() {
-  $( "#lists" ).sortable({
-    stop: function(event, ui) {
-      lis = $(".lists-container").find("li");
-      list_ids = [];
-      
-      for (var i = 0; i < lis.length; i++) {
-        list_ids.push($(lis[i]).data("id"));
-      }
-      debugger;
-      console.log(list_ids);
-      /* É preciso passar o token para impedir que alguém faça uma resquisição se passando por você */
-      var csrfToken = $("meta[name='csrf-token']").attr("content");
-      $.ajaxSetup({
-        headers: {
-          'X-CSRF-Token': csrfToken
+List = {
+  sortable: function(){
+    var self = this;
+
+    $( "#lists" ).sortable({
+      stop: function(event, ui) {
+        lis = $(".lists-container").find("li");
+        list_ids = [];
+        
+        for (var i = 0; i < lis.length; i++) {
+          list_ids.push($(lis[i]).data("id"));
         }
-      });
+        /* É preciso passar o token para impedir que alguém faça uma resquisição se passando por você */
+        var csrfToken = $("meta[name='csrf-token']").attr("content");
+        $.ajaxSetup({
+          headers: {
+            'X-CSRF-Token': csrfToken
+          }
+        });
+        
+        self.postReorder('/lists/reorder', {ids: list_ids}, function(){ console.log(list_ids) });
+        
+      }
+    });
 
-      $.post(
-        '/lists/reorder',  
-        {ids: list_ids},
-        function(){ console.log(list_ids) }
-      );
-    }
-  });
+    $( "#lists" ).sortable({
+      placeholder: "ui-state-highlight"
+    });
 
-  $( "#lists" ).sortable({
-    placeholder: "ui-state-highlight"
-  });
+    $( "#lists" ).disableSelection();
+  },
+  postReorder: function (url, data, succesessFunction){
+    $.post(
+        url, //'/lists/reorder',  
+        data, //{ids: list_ids},
+        succesessFunction  //function(){ console.log(list_ids) }
+        );
+  }
+};
 
-  $( "#lists" ).disableSelection();
-});
+
+
