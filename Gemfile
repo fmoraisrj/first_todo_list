@@ -1,9 +1,17 @@
 source 'https://rubygems.org'
 
+ruby '1.9.3'
 gem 'rails',             '3.2.13'
 gem 'strong_parameters', '0.2.1'
 gem 'mongoid'
 gem 'mongoid_rails_migrations', "~> 1.0.0" 
+gem 'heroku'
+
+
+
+group :production do
+  gem 'thin'
+end
 
 group :development, :test do
   gem 'rspec-rails', '~> 2.0'

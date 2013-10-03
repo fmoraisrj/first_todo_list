@@ -24,7 +24,6 @@ describe TasksController do
     context "atributos válidos" do
       before do
         post :create, list_id: @my_list.id, task: { list_id: @my_list.id, body: "texto" }
-
       end
       it "deveria salvar uma task nova" do
         assigns(:task).body.should == "texto"
@@ -77,7 +76,39 @@ describe TasksController do
 
       it "deveria atualizar a task indicada" do
         @task.reload.body.should == "novo texto"        
+        response.status.should == 302
       end
+
+      it "deveria redirecionar para show da list referente" do
+        response.should redirect_to controller: "lists", action: "show", id: @my_list.id
+      end
+    end
+
+    context "atributos inválidos" do
+      before do
+        put :update, list_id: @my_list.id, id: @task.id, task: { body: "" }
+      end
+
+      it "deveria mostrar a mensagem de erro" do
+        flash.now[:error] =  'Não foi possível atualizar a task'
+        response.status.should == 200
+      end
+
+      it "deveria redirecionar para show da list referente" do
+        response.should render_template :edit
+      end
+    end
+  end
+
+  describe "DELETE #destroy" do
+    
+    xit "deveria redirecionar para o show daquela lista" do
+    end
+
+    xit "deveria lançar as mensagens flash de erro" do
+    end
+
+    xit "deveria lançar uma mensagem flash de sucesso" do      
     end
   end
 

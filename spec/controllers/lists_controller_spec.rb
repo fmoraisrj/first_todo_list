@@ -119,7 +119,7 @@ describe ListsController do
       #List.stub(:find).and_return(lista)
     #end
 
-    it "deveria lançar um 'status 302'" do # porque ele encontrou a rota para qual foi redirecionado
+    it "deveria lançar um 'status 302' devido ao erro" do # porque ele encontrou a rota para qual foi redirecionado
       delete :destroy, id: wrong_id
       response.status.should eql 302 #404
     end
