@@ -1,3 +1,4 @@
+# encoding: UTF-8
 class ListsController < ApplicationController
 	def new
 		@list = List.new

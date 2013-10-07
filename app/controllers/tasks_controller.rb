@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class TasksController < ApplicationController
   before_filter :load_list, only: [:new, :edit]
 
@@ -47,13 +49,13 @@ class TasksController < ApplicationController
   def destroy
     @list = List.find(params[:list_id])
     @task = @list.tasks.find(params[:id])
-
     @task.destroy
     flash[:notice] = 'Task destruída com sucesso'
-    rescue Mongoid::Errors::DocumentNotFound
-      flash[:error] = "Task não encontrada"
-    ensure
-      redirect_to list_path(@task.list_id)
+  rescue Mongoid::Errors::DocumentNotFound
+    flash[:error] = "Task não encontrada"
+  ensure
+    
+    redirect_to list_path(@list.id)
   end
   
   # ********** Não deve ter Show  e nem Index

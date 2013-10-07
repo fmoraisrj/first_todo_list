@@ -1,4 +1,4 @@
-
+# encoding: UTF-8
 require "spec_helper"
 
 describe ListsController do   
@@ -129,7 +129,7 @@ describe ListsController do
       #Um Stub foi utilizando aqui para o método find() pois ele não é o principal nesse teste
       List.stub(:find).and_return(lista)
       #Isso é um Mock para verificar se a lista.destroy se comportou como deveria
-      lista.should_receive(:destroy)
+      lista.should_receive(:destroy)      
       delete :destroy, id: id
     end
 
