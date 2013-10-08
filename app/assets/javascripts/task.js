@@ -21,7 +21,11 @@ Task = {
         });
 
         list_id = $("#tasks").data("list-id");
-        this.postReorder( '/lists/' + list_id + '/tasks/reorder', { "ids": tasks_ids, "list_id": list_id }, function(){ console.log("Task") });
+        this.postReorder( 
+          '/lists/' + list_id + '/tasks/reorder',
+          { "ids": tasks_ids, "list_id": list_id },
+          function(){ console.log("Task") }
+        );
       }
     });
 

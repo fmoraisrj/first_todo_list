@@ -5,7 +5,8 @@ body, html{
 }
 
 html>body .sort li { 
-  height: 1.5em; 
+  height: auto;
+  overflow: ellipsis;
   line-height: 1.2em; 
 }
 
@@ -28,7 +29,6 @@ html>body .sort li {
   margin: 0 5px 5px 5px; 
   padding: 5px; 
   font-size: 1.2em; 
-  height: 1.5em;
 }
 
 .lists-container li, .tasks-container li {
