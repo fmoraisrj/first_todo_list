@@ -6,6 +6,7 @@ gem 'strong_parameters', '0.2.1'
 gem 'mongoid'
 gem 'mongoid_rails_migrations', "~> 1.0.0" 
 gem 'heroku'
+gem 'jquery-rails'
 
 
 
@@ -45,8 +46,6 @@ group :assets do
 
   gem 'uglifier', '>= 1.0.3'
 end
-
-gem 'jquery-rails'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

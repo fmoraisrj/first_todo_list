@@ -10,10 +10,9 @@ List = {
       stop: function(event, ui) {
         lis = $(".lists-container").find("li");
         list_ids = [];
-        
         for (var i = 0; i < lis.length; i++) {
-          list_ids.push($(lis[i]).data("id"));
-        }
+          list_ids.push($(lis[i]).data("id")); 
+        } 
         /* É preciso passar o token para impedir que alguém faça uma resquisição se passando por você */
         var csrfToken = $("meta[name='csrf-token']").attr("content");
         $.ajaxSetup({
@@ -22,8 +21,7 @@ List = {
           }
         });
         
-        self.postReorder('/lists/reorder', {ids: list_ids}, function(){ console.log(list_ids) });
-        
+        self.postReorder('/lists/reorder', {ids: list_ids}, function(){ console.log("Post done.") });
       }
     });
 
@@ -38,7 +36,7 @@ List = {
         url, //'/lists/reorder',  
         data, //{ids: list_ids},
         succesessFunction  //function(){ console.log(list_ids) }
-        );
+    );
   }
 };
 
