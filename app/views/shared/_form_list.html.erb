@@ -1,6 +1,4 @@
-
 <%= form_for @list do |f| %>
-
   <% if @list.errors.any? %>
     <div id="errorExplanation">
       <h2><%= pluralize(@list.errors.count, "error") %> 
@@ -13,12 +11,10 @@
       </ul>
     </div>
   <% end %>
-
   <p>
     <%= f.label :name_list %><br>
     <%= f.text_field :name_list %><br>
   </p>
-
   <p>
     <%= f.submit :Save %>
   </p>
