@@ -1,4 +1,10 @@
-
+/*font-weight: bold;
+width: 300px;
+text-overflow: ellipsis;
+overflow: hidden;
+display: block;
+height: 30px;
+white-space: nowrap;*/
 body, html{
   margin: 0.5%;
   padding: 0%;

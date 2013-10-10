@@ -12,13 +12,21 @@
     <header>
       <div class="navbar">
         <div class="navbar-inner">
-          <%= link_to "To do", lists_path , class: "brand" %>
+          <%= link_to "To do list", lists_path , class: "brand" %>
           <ul class="nav">
             <li><%= link_to 'New list', new_list_path %></li>
           </ul>
         </div>
       </div>
     </header>
+
+    <%- flash.each do |key, msg| -%>
+      <div id="<%= key %>">
+        <p style="float:right;"><%= link_to_function 'X', "Effect.Fade('#{key}')" %></p>
+        <p><%= msg %></p>
+        <div class="clear"></div>
+      </div>
+    <%- end -%>
     <div class="content">
       <%= yield %>
     </div>

@@ -7,7 +7,8 @@ gem 'mongoid'
 gem 'mongoid_rails_migrations', "~> 1.0.0" 
 gem 'heroku'
 gem 'jquery-rails'
-
+# Devise is a flexible authentication solution for Rails based on Warden
+gem "devise"
 
 
 group :production do
@@ -30,9 +31,6 @@ gem "compass", "~> 0.12.2"
 
 #Biblioteca para ajudar com testes e TDD
 gem "rspec", "~> 2.14.1"
-
-# Devise is a flexible authentication solution for Rails based on Warden
-gem "devise", "~> 3.0.2"
 
 # Gems used only for assets and not required
 # in production environments by default.

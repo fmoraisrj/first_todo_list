@@ -1,3 +1,4 @@
+# encoding: UTF-8
 require "spec_helper"
 
 describe User do
@@ -5,7 +6,7 @@ describe User do
     User.new
   end
 
-  it "is vallid" do
+  xit "is vallid" do
     usu = subject
     usu.username = "Felipe"
     usu.password = "123"
@@ -13,14 +14,14 @@ describe User do
     usu.should be_valid
   end
 
-  it "is invalid without username" do
+  xit "is invalid without username" do
     usu = subject
     usu.username = ""
 
     usu.should_not be_valid
   end
 
-  it "user inválido sem password" do
+  xit "user inválido sem password" do
     usu = subject
     usu.password = ""
 

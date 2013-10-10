@@ -198,7 +198,7 @@ DEPENDENCIES
   compass (~> 0.12.2)
   database_cleaner
   debugger (~> 1.6.1)
-  devise (~> 3.0.2)
+  devise
   heroku
   jasmine
   jquery-rails

@@ -1,4 +1,3 @@
-
 Task = {
   sortable: function(){
     var self = this;
@@ -21,11 +20,12 @@ Task = {
         });
 
         list_id = $("#tasks").data("list-id");
-        this.postReorder( 
-          '/lists/' + list_id + '/tasks/reorder',
-          { "ids": tasks_ids, "list_id": list_id },
-          function(){ console.log("Task") }
-        );
+
+        var url = '/lists/' + list_id + '/tasks/reorder';
+        var data = { "ids": tasks_ids, "list_id": list_id };
+        var succesessFunction = function(){};
+
+        //Ajax.postReorder(url, data, succesessFunction);
       }
     });
 
@@ -34,14 +34,6 @@ Task = {
     });
 
     $("#tasks").disableSelection();
-  },
-
-  postReorder: function (url, data, succesessFunction){
-    $.post(
-        url, //'/lists/reorder',  
-        data, //{ids: list_ids},
-        succesessFunction  //function(){ console.log(list_ids) }
-    );
   }
 }
 

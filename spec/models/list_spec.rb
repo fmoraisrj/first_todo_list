@@ -1,3 +1,4 @@
+# encoding: UTF-8
 require "spec_helper"
 
 # describe User do
@@ -24,9 +25,7 @@ describe List do
       #todo validar se o cara foi criado com todos os campos preenchidos certinhos
       it "deveria salvar uma lista" do
         subject.name_list = "felipe"
-        subject.item1 = "i1"
-        subject.item1 = "i2"
-        subject.item1 = "i3"
+        
         subject.should be_valid
       end
 

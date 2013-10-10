@@ -20,8 +20,11 @@ List = {
             'X-CSRF-Token': csrfToken
           }
         });
-        
-        self.postReorder('/lists/reorder', {ids: list_ids}, function(){ console.log("Post done.") });
+        var url = '/lists/reorder';
+        var data = {ids: list_ids};
+        var succesessFunction = function(){};
+
+       // Ajax.postReorder(url, data, succesessFunction);
       }
     });
 
