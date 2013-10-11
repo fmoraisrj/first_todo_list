@@ -23,7 +23,7 @@ Task = {
 
         var url = '/lists/' + list_id + '/tasks/reorder';
         var data = { "ids": tasks_ids, "list_id": list_id };
-        var succesessFunction = function(){};
+        var succesessFunction = function(){console.log("done")};
 
         Ajax.postReorder(url, data, succesessFunction);
       }

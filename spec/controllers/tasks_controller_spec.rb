@@ -7,7 +7,7 @@ describe TasksController do
 
   before do
     @my_list = List.create!(id: 3, name_list: "list")
-    @task = Task.create!(list_id: @my_list.id, body: "texto")
+    @task = Task.create!(list_id: @my_list.id, body: "t0", order: 0)
   end
 
   describe "GET #new" do
@@ -142,9 +142,46 @@ describe "POST #create" do
         response.should redirect_to controller: "lists", action: "show", id: @my_list.id 
       end
     end
-  
-    
   end
+
+  describe "POST #reorder" do
+    before(:each) do
+      @t1 = Task.create!(list_id: @my_list.id, body: "t1", order: 1)
+      @t2 = Task.create!(list_id: @my_list.id, body: "t2", order: 2)
+      @t3 = Task.create!(list_id: @my_list.id, body: "t3", order: 3)
+    end
+
+    it "deveria reordenar as tasks" do
+      ids = [@t3.id, @t2.id, @t1.id, @task.id]
+      #ids = @tasks.collect{|task| task.id }
+      post :reorder, list_id: @my_list.id, ids: ids
+      
+      sorted_tasks = Task.asc(:order).to_a
+      sorted_tasks[1].id.to_s.should == @t1.id.to_s
+      response.status.should == 200
+    end
+  end
+  # describe "POST #reorder" do
+  #   before do
+  #     @l1 = List.create!(name_list: "list1", order: 1 )
+  #     @l2 = List.create!(name_list: "list2", order: 2 )
+  #     @l3 = List.create!(name_list: "list3", order: 3 )
+
+  #     List.unstub(:find)
+  #   end
+
+  #   it "deveria reordenar as listas" do
+  #     ids = [@l3.id, @l2.id, @l1.id]
+  #     post :reorder,  ids: ids 
+
+  #     sorted_lists = List.asc(:order).to_a
+  #     sorted_lists.collect{ |list| list.id }
+  #     sorted_lists[0].id.to_s.should == ids[0].to_s 
+  #     sorted_lists[1].id.should == ids[1] 
+  #     sorted_lists[2].id.should == ids[2] 
+  #     response.status.should == 200
+  #   end
+  # end
 
   # ********** Não deve ter Show  e nem Index
   

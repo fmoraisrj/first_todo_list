@@ -238,6 +238,5 @@ describe ListsController do
       sorted_lists[2].id.should == ids[2] 
       response.status.should == 200
     end
-
   end
 end

@@ -71,7 +71,7 @@ class TasksController < ApplicationController
     @ids.each_with_index do |id, index|
       @task = @list.tasks.find(id)
       @task.order = index
-      @task.save
+      @task.save!
     end
     render text: "Ok", status: 200
   end

@@ -24,7 +24,7 @@ List = {
         var data = {ids: list_ids};
         var succesessFunction = function(){};
 
-       // Ajax.postReorder(url, data, succesessFunction);
+        Ajax.postReorder(url, data, succesessFunction);
       }
     });
 
