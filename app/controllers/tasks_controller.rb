@@ -67,12 +67,13 @@ class TasksController < ApplicationController
   def reorder
     @list = List.find params[:list_id]
     @ids  = params[:ids]
-
+    
     @ids.each_with_index do |id, index|
       @task = @list.tasks.find(id)
       @task.order = index
       @task.save!
     end
+    @list.save!
     render text: "Ok", status: 200
   end
 end

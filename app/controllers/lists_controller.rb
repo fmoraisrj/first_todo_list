@@ -24,9 +24,7 @@ class ListsController < ApplicationController
 
 	def show
 		@list = List.find(params[:id])
-		
-		@list.tasks.asc(:order).to_a
-
+		@tasks = @list.tasks.asc(:order).to_a
 		rescue StandardError
 			redirect_to lists_path
 	end
