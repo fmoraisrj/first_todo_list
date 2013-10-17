@@ -19,6 +19,7 @@ group :development, :test do
   gem 'rspec-rails', '~> 2.0'
   gem "debugger", "~> 1.6.1"
   gem "jasmine"
+  gem "awesome_print", :require => 'ap'
 end
 
 group :test do

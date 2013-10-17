@@ -16,7 +16,7 @@
 <p>
   <%= hidden_field_tag "task[list_id]", @list.id %>
   <%= f.check_box :status %>
-  <%= f.text_field :body, placeholder: "Tell me your task" %>
+  <%= f.text_field :body, placeholder: "Tell me your task", autofocus: true %>
 </p>
 
 <p>
