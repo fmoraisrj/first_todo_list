@@ -2,10 +2,6 @@
 <html>
 <head>
   <title>TodoList</title>
-
-   
-
-
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   
@@ -20,8 +16,21 @@
           <ul class="nav">
             <li><%= link_to 'New list', new_list_path %></li>
           </ul>
+
+
+          <div id="login">
+            <form class="navbar-form pull-right form-inline">
+              <input class="span2" type="text" placeholder="Email">
+              <input class="span2" type="password" placeholder="Password">
+              <button type="submit" class="btn">Sign in</button>
+            </form>
+          </div>
         </div>
+
+
       </div>
+
+      
     </header>
 
     <%- flash.each do |key, msg| -%>
@@ -31,6 +40,7 @@
         <div class="clear"></div>
       </div>
     <%- end -%>
+
     <div class="content">
       <%= yield %>
     </div>

@@ -1,2 +1,28 @@
-<h1>Home#index</h1>
-<p>Find me in app/views/home/index.html.erb</p>
+
+<div id="container-info">
+  <div class="container-total">
+    <div class="total">
+      Users: <%= @users_counter %>
+    </div>
+    <br />
+
+    <div class="total">
+      Lists: <%= @lists_counter %>
+    </div>
+    <br />
+
+    <div class="total">
+      Tasks: <%= @tasks_counter %>
+    </div>
+  </div>
+  <div id="users">
+    <label> Users </label>
+    <% @users.each do |user| %>
+    <p> <strong> <%= user.username %> </strong> </p>
+    <% end%>
+  </div>
+</div>
+
+<div id="login" >
+  <h1> Aqui terá o form de login </h1>
+</div>
