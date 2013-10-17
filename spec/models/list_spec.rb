@@ -28,7 +28,6 @@ describe List do
         
         subject.should be_valid
       end
-
     end
   end
 end

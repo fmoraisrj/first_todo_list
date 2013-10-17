@@ -55,10 +55,5 @@ describe User do
         expect{ user.save! }.to raise_error(Mongoid::Errors::Validations)
       end
     end
-
-    describe "attr_accessible" do
-
-    end
-
   end
 end
