@@ -10,14 +10,12 @@
 <body>
   <div class="container">
     <header>
-      <div class="navbar">
+      <!-- <div class="navbar">
         <div class="navbar-inner">
           <%= link_to "To do list", lists_path , class: "brand" %>
           <ul class="nav">
             <li><%= link_to 'New list', new_list_path %></li>
           </ul>
-
-
           <div id="login">
             <form class="navbar-form pull-right form-inline">
               <input class="span2" type="text" placeholder="Email">
@@ -26,11 +24,10 @@
             </form>
           </div>
         </div>
-
-
-      </div>
-
-      
+      </div> -->
+      <ul>
+        <%= render 'shared/navigation' %> 
+      </ul>
     </header>
 
     <%- flash.each do |key, msg| -%>
