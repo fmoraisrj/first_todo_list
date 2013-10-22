@@ -10,11 +10,11 @@ class UsersController < Devise::RegistrationsController
   end
 
   def create
-    @user = User.create!(user_params)
-
+    @user = User.create(user_params)
+    
     if @user.persisted?
       flash[:notice] = 'Welcome to mtodolist!'
-      redirect_to lists_path
+      redirect_to home_index_path
     else
       flash.now[:erro] = "We can't create yout user, please correct and try again."
       render :new
@@ -26,7 +26,7 @@ class UsersController < Devise::RegistrationsController
   def configure_permitted_parameters
     devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:username, :email) }
   end
-  
+
   private
 
   def user_params
