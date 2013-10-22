@@ -1,9 +1,5 @@
 class UsersController < Devise::RegistrationsController
-  before_filter :configure_permitted_parameters, if: :devise_controller? # :authenticate_user!
-
-  def show
-    @user = User.find(params[:id])
-  end
+  before_filter :configure_permitted_parameters
 
   def new
     @user = User.new
@@ -13,7 +9,7 @@ class UsersController < Devise::RegistrationsController
     @user = User.create(user_params)
     
     if @user.persisted?
-      flash[:notice] = 'Welcome to mtodolist!'
+      flash[:notice] = "Welcome to mtodolist!"
       redirect_to home_index_path
     else
       flash.now[:erro] = "We can't create yout user, please correct and try again."
@@ -30,7 +26,7 @@ class UsersController < Devise::RegistrationsController
   private
 
   def user_params
-    params.require(:user).permit(:username,:email, :password)      
+    params.require(:user).permit(:username, :email, :password)      
   end
 end
 
