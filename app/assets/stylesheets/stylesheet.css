@@ -12,7 +12,10 @@ html>body .sort li {
 .container {
   width: 100%;
 }
-
+/* login */
+#login {
+  float: right;
+}
 /* sortable */
 .ui-state-highlight { 
   height: 1.5em; 

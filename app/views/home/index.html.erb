@@ -15,14 +15,11 @@
       Tasks: <%= @tasks_counter %>
     </div>
   </div>
+  
   <div id="users">
     <label> Users </label>
     <% @users.each do |user| %>
-    <p> <strong> <%= user.username %> </strong> </p>
+      <p> <strong> <%= user.username %> </strong> </p>
     <% end%>
   </div>
-</div>
-
-<div id="login" >
-  <h1> Aqui terá o form de login </h1>
 </div>

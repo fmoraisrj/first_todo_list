@@ -7,7 +7,7 @@ TodoList::Application.routes.draw do
 
 
 
-  devise_for :users, controllers: {registrations: "users", sessions: "sessions"}
+  devise_for :users, controllers: {registrations: "users", sessions: "session"}
   
   # The priority is based upon order of creation:
   # first created -> highest priority.

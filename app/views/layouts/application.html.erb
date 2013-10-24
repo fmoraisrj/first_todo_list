@@ -12,17 +12,15 @@
     <header>
       <div class="navbar">
         <div class="navbar-inner">
-          <%= link_to "To do list", lists_path , class: "brand" %>
-          <ul class="nav">
-            <li><%= link_to 'New list', new_list_path %></li>
+          <%= link_to "To do list", root_path , class: "brand" %>
+          <ul class="nav"> 
+            <% if user_signed_in? %>
+              <li><%= link_to 'New list', new_list_path %></li>
+            <% end -%>
           </ul>
-          <div id="login">
-            <form class="navbar-form pull-right form-inline">
-              <input class="span2" type="text" placeholder="Email">
-              <input class="span2" type="password" placeholder="Password">
-              <button type="submit" class="btn">Sign in</button>
-            </form>
-          </div>
+          <ul id="login" class ="nav">
+            <li> <%= link_to "Login", new_user_session_path %></li>
+          </ul>
         </div>
       </div> 
       <ul>

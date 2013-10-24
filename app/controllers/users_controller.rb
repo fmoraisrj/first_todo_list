@@ -17,13 +17,11 @@ class UsersController < Devise::RegistrationsController
     end
   end
 
-  protected
+  private
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:username, :email) }
   end
-
-  private
 
   def user_params
     params.require(:user).permit(:username, :email, :password)      
