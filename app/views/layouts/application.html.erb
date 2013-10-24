@@ -12,20 +12,38 @@
     <header>
       <div class="navbar">
         <div class="navbar-inner">
-          <%= link_to "To do list", root_path , class: "brand" %>
+          <%= link_to "mTodo list", root_path , class: "brand" %>
           <ul class="nav"> 
             <% if user_signed_in? %>
               <li><%= link_to 'New list', new_list_path %></li>
             <% end -%>
           </ul>
           <ul id="login" class ="nav">
-            <li> <%= link_to "Login", new_user_session_path %></li>
+            <% if user_signed_in? %>
+              <li>
+              <%= link_to('Logout', destroy_user_session_path, :method=>'delete') %>
+              </li>
+            <% else %>
+              <li>
+              <%= link_to "Login", new_user_session_path  %>
+              </li>
+            <% end %>
           </ul>
+
+          <ul id="signup" class="nav">
+            <% if user_signed_in? %>
+              <li>
+              <%= link_to('Edit account', edit_user_registration_path) %>
+              </li>
+            <% else %>
+              <li>
+              <%= link_to('Sign up', new_user_registration_path)  %>
+              </li>
+            <% end %>
+          </ul>
+
         </div>
       </div> 
-      <ul>
-        <%= render 'shared/navigation' %> 
-      </ul>
     </header>
 
     <%- flash.each do |key, msg| -%>
@@ -39,6 +57,11 @@
     <div class="content">
       <%= yield %>
     </div>
+
+    <hr>
+    <footer>
+        <p>&copy; <a href="https://github.com/fmoraisrj" > Felipe de Morais </a> </p>
+      </footer>
   </div>
 </body>
 </html>

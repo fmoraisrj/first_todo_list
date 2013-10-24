@@ -43,9 +43,9 @@ class User
   field :password, type: String
   field :email,    type: String
   
-  validates_presence_of :username, :password, :password
+  validates_presence_of :username, :password
   validates_uniqueness_of :username, :email, case_sensitive: false
-  #attr_accessible :username, :email, :password, :password_confirmation, :remember_me
+  
 end
 
 

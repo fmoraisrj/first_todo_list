@@ -1,25 +1,29 @@
 
 <div id="container-info">
-  <div class="container-total">
-    <div class="total">
-      Users: <%= @users_counter %>
-    </div>
-    <br />
-
-    <div class="total">
-      Lists: <%= @lists_counter %>
-    </div>
-    <br />
-
-    <div class="total">
-      Tasks: <%= @tasks_counter %>
-    </div>
+  <!-- Main card -->
+  <div class="hero-unit">
+    <h1> 
+      Welcome to mTodo List!
+    </h1>
+    
+    <p> 
+      This is a service where you can manage your todolists everywhere like Groucery lists, Buy lists, Travel lists. 
+    </p>
   </div>
-  
-  <div id="users">
-    <label> Users </label>
-    <% @users.each do |user| %>
-      <p> <strong> <%= user.username %> </strong> </p>
-    <% end%>
+
+  <!-- Row of columns -->
+  <div class="row-fluid">
+    <div class="span4">
+      <h2> Users</h2>
+      <p>User is your account with us. If you don't have an account <%= link_to('click here', new_user_registration_path)  %> to create yours.  </p>
+    </div>
+    <div class="span4">
+      <h2> Lists</h2>
+      <p>Lists are the way as you will manage what you have to do orderly, using each list for one purpose with its tasks.
+   </div>
+    <div class="span4">
+      <h2>Tasks</h2>
+      <p>Tasks are exactly what you have to do step by step to complete the list porpuse.</p>
+    </div>
   </div>
 </div>
