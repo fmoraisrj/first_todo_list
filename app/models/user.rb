@@ -45,7 +45,6 @@ class User
   
   validates_presence_of :username, :password
   validates_uniqueness_of :username, :email, case_sensitive: false
-  
 end
 
 
