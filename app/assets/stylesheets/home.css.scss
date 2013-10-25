@@ -7,7 +7,7 @@
 }
 /* sign up */
 
-#container-signup, #container-login{
+#container-signup, #container-login {
   margin-right: auto;
   margin-left: auto;
   width: 30%;
@@ -17,4 +17,17 @@
 
 #remember-me {
   display: inline-block;
+}
+
+
+/* edit account */
+#form-edit-account {
+  width: 40%;
+  margin-left: auto;
+  margin-right: auto;  
+}
+
+
+.italic-edit {
+  font-size: 10px;
 }
