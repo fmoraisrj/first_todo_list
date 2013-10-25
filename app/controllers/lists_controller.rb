@@ -2,11 +2,13 @@
 class ListsController < ApplicationController
 	def new
 		@list = List.new
+		@action = "Creating"
 	end
 
 	def edit
 		begin
 			@list = List.find(params[:id])
+			@action = "Editing"
 		rescue
 			flash.now[:error] = "List não encontrada"
 			render :edit

@@ -1,4 +1,7 @@
 <%= form_for @list do |f| %>
+
+  <h1> <%= @action %> a list</h1> 
+
   <% if @list.errors.any? %>
     <div id="errorExplanation">
       <h2><%= pluralize(@list.errors.count, "error") %> 
@@ -12,12 +15,10 @@
     </div>
   <% end %>
   <p>
-    <%= f.label :name_list %><br>
-    <%= f.text_field :name_list, autofocus: true %><br>
-  </p>
-  <p>
+    <%= f.text_field :name_list, autofocus: true, :placeholder => "Name list" %>
+    <br />
     <%= f.submit :Save %>
   </p>
+  <%= link_to 'Back', lists_path %>
 <% end %>
 
-<%= link_to 'Back', lists_path %>
