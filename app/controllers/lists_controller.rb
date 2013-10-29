@@ -32,8 +32,8 @@ class ListsController < ApplicationController
 	end
 
 	def index
-		@lists = User.find_by(username: current_user.username ).lists.to_a
-
+		@lists = User.find_by(username: current_user.username).lists.to_a
+		
 		respond_to do |format|
 			format.html 
 			format.xml { render xml: @lists.to_xml }
@@ -44,10 +44,8 @@ class ListsController < ApplicationController
 	def create 
 		@list         = List.new(list_params)
 		@list.user_id = current_user.id
-		@list         = List.create(list_params)
 		
-		debugger
-		if @list.persisted?
+		if @list.save
 			flash[:notice] = 'Lista criada com sucesso'
 			redirect_to list_path(@list.id)
 		else

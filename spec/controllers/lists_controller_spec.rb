@@ -7,17 +7,28 @@ describe ListsController do
 
   let(:id) { "1" }
 
-  let :new_list do
-    List.new({ name_list: "my_new_list", item1: "my_item1", item2: "my_item2", item3: "my_item3" })
-  end
+  let(:user) { User.new({
+                          :_id => "525ea17c623571e3f7000003",
+                          :email => "felipe@mtodolist.com",
+                          :username => "Felipe"
+                        })
+  }
 
-  
+  let :new_list do
+    List.new({ name_list: "my_new_list",
+               item1:     "my_item1", 
+               item2:     "my_item2", 
+               item3:     "my_item3", 
+               user_id:   user.id 
+              })
+  end
 
   let(:wrong_id) { "a23b" }
 
-  before do
+  before :each do
     new_list.id = id
     List.stub(:find).and_return(new_list) 
+    User.create(user)
   end
 
   describe "GET #index" do
@@ -25,16 +36,31 @@ describe ListsController do
       @my_list = List.create(name_list: "eede")
     end
 
-    it "deveria criar uma lista" do
-      # O get funciona parecido com o send onde o parametro passado
-      #execeuta  o método(action) indicado no simbôlo
+    # it "deveria criar uma lista" do
+    #   # O get funciona parecido com o send onde o parametro passado
+    #   #execeuta  o método(action) indicado no simbôlo
+    #   get :index
+    #   # O assigns pega a variável indicada no parâmetro da classe do teste.
+    #   assigns(:lists).should == [@my_list]
+    # end
+
+    it "deveria ser um array" do
+      sign_in user
+      debugger
       get :index
-      # O assigns pega a variável indicada no parâmetro da classe do teste.
-      assigns(:lists).should == [@my_list]
+
+      assigns(:lists).should be_an_instance_of Array
+    end
+
+    it "deveria ser uma instância de uma lista" do
+      get :index
+      
+      assigns(:lists)[0].should be_an_instance_of List
     end
 
     it "deveria renderizar a lista de lists" do
       get :index
+
       response.should render_template("index")
     end
   end
