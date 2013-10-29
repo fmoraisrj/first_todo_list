@@ -1,4 +1,4 @@
-<%= form_for [@list, @task] do |f| %>
+<%= form_for [@list, @task], :html => { :id => "form-task" } do |f| %>
   <h1>New Task for <%= @list.name_list %> </h1>
 
   <% if @task.errors.any? %>

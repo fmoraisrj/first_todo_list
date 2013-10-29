@@ -42,6 +42,7 @@ class User
   field :username, type: String
   field :password, type: String
   field :email,    type: String
+  has_many :lists
   
   validates_presence_of :username, :password
   validates_uniqueness_of :username, :email, case_sensitive: false

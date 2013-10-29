@@ -7,24 +7,26 @@ TodoList::Application.routes.draw do
 
 
 
-  devise_for :users, controllers: { registrations: "users" }
+  devise_for :users, controllers: { registrations: "users" }  
   
   # The priority is based upon order of creation:
   # first created -> highest priority.
   resources :lists do 
-    # a task dentro da lista significa que não existe uma task que não pertença a auma lista.
+    collection do 
+      post :reorder
+    end
+    #A task dentro da lista significa que não existe uma task que não pertença a uma lista.
     #Todos os links de task ficaram sob domínio das listas ex.: /lists/:list_id/tasks/new
     resources :tasks, except: [:show, :index]  do 
       collection do 
         post :reorder
       end
     end
-
-    collection do 
-      post :reorder
-    end
   end
-  
+    
+
+
+   
   #get "/minha-rota" => "list#index"
 
  

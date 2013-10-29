@@ -1,12 +1,11 @@
 /* home */
-
 .row-fluid {
   width: 90%;
   margin-left: auto;
   margin-right: auto;
 }
-/* sign up */
 
+/* sign up */
 #container-signup, #container-login {
   margin-right: auto;
   margin-left: auto;
@@ -14,20 +13,18 @@
 }
 
 /* sign in */
-
 #remember-me {
   display: inline-block;
 }
 
-
 /* edit account */
-#form-edit-account {
-  width: 60%;
+#form-edit-account, #form-list, #form-task {
+  width: 50%;
   margin-left: auto;
   margin-right: auto;  
 }
 
-
 .italic-edit {
   font-size: 10px;
 }
+

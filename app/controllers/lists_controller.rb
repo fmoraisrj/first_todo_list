@@ -32,7 +32,7 @@ class ListsController < ApplicationController
 	end
 
 	def index
-		@lists = List.all_sorted.to_a
+		@lists = User.find_by(username: current_user.username ).lists.to_a
 
 		respond_to do |format|
 			format.html 
@@ -42,10 +42,11 @@ class ListsController < ApplicationController
 	end
 
 	def create 
-		# render text: params[:list].inspect
-		#List.create(name_list:"Things to do", item1:"1", item2:"2", item3:"3")
-		@list = List.create(list_params)
-
+		@list         = List.new(list_params)
+		@list.user_id = current_user.id
+		@list         = List.create(list_params)
+		
+		debugger
 		if @list.persisted?
 			flash[:notice] = 'Lista criada com sucesso'
 			redirect_to list_path(@list.id)
@@ -69,10 +70,7 @@ class ListsController < ApplicationController
 
 	def list_params
 		params.require(:list).permit(
-			:name_list,
-			:item1,
-			:item2,
-			:item3
+			:name_list
 		)
 	end
 

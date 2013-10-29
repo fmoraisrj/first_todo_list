@@ -1,7 +1,7 @@
 class AddColumnsOrderAndDateInList < Mongoid::Migration
   def self.up
     List.all.each_with_index do |list, index|
-      list.date = Time.now
+      list.date  = Time.now
       list.order = index
       list.save!
     end
