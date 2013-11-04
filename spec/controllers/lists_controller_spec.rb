@@ -31,6 +31,8 @@ describe ListsController do
     new_list.id = id
     List.stub(:find).and_return(new_list) 
     @request.env["devise.mapping"] = Devise.mappings[:user]
+
+    # Login do user é importante para a segurança do sistema
     u = user 
     u.save!
     sign_in u

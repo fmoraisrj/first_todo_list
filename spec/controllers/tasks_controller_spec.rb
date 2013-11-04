@@ -5,9 +5,22 @@ require "spec_helper"
 
 describe TasksController do 
 
+  let(:user) { User.new({
+                          :_id => "525ea17c623571e3f7000003",
+                          :email => "felipe@todolist.com",
+                          :username => "user_test",
+                          :password => "12345678"
+                        })
+  }
+
   before do
     @my_list = List.create!(id: 3, name_list: "list")
     @task = Task.create!(list_id: @my_list.id, body: "t0", order: 0)
+
+    # Login do user é importante para a segurança do sistema
+    u = user 
+    u.save!
+    sign_in u
   end
 
   describe "GET #new" do
@@ -23,15 +36,17 @@ describe TasksController do
   end
 end
 
-describe "POST #create" do
-  context "atributos validos" do
-    before do
-      post :create, list_id: @my_list.id, task: { list_id: @my_list.id, body: "texto" }
-    end
-    it "deveria salvar uma task nova" do
-      assigns(:task).body.should == "texto"
-    end
-    it "deveria redenrizar o show da lista que a task pertence" do
+  describe "POST #create" do
+    context "atributos validos" do
+      before do
+        post :create, list_id: @my_list.id, task: { list_id: @my_list.id, body: "texto" }
+      end
+      
+      it "deveria salvar uma task nova" do
+        assigns(:task).body.should == "texto"
+      end
+
+      it "deveria redenrizar o show da lista que a task pertence" do
         redirect_to list_path(@task.list_id) #path
         response.should redirect_to "/lists/#{@my_list.id}"
       end
@@ -68,7 +83,7 @@ describe "POST #create" do
   describe "PUT #update" do
     before  do
       @task.save.should be_true
-      @task.body.should == "texto"
+      @task.body.should == "t0"
       Task.should have(1).item
     end
 
@@ -153,35 +168,15 @@ describe "POST #create" do
 
     it "deveria reordenar as tasks" do
       ids = [@t3.id, @t2.id, @t1.id, @task.id]
-      #ids = @tasks.collect{|task| task.id }
+      # ids = @tasks.collect{|task| task.id }
+      # ids = @tasks.map{ |task| task.id } # maps is a alias to collect
       post :reorder, list_id: @my_list.id, ids: ids
-      
       sorted_tasks = Task.asc(:order).to_a
-      sorted_tasks[1].id.to_s.should == @t1.id.to_s
+      # Como o @t2 é o segundo a ser passado ele deve ser o segundo na ordem.
+      sorted_tasks[1].id.to_s.should == @t2.id.to_s
       response.status.should == 200
     end
   end
-  # describe "POST #reorder" do
-  #   before do
-  #     @l1 = List.create!(name_list: "list1", order: 1 )
-  #     @l2 = List.create!(name_list: "list2", order: 2 )
-  #     @l3 = List.create!(name_list: "list3", order: 3 )
-
-  #     List.unstub(:find)
-  #   end
-
-  #   it "deveria reordenar as listas" do
-  #     ids = [@l3.id, @l2.id, @l1.id]
-  #     post :reorder,  ids: ids 
-
-  #     sorted_lists = List.asc(:order).to_a
-  #     sorted_lists.collect{ |list| list.id }
-  #     sorted_lists[0].id.to_s.should == ids[0].to_s 
-  #     sorted_lists[1].id.should == ids[1] 
-  #     sorted_lists[2].id.should == ids[2] 
-  #     response.status.should == 200
-  #   end
-  # end
 
   # ********** Não deve ter Show  e nem Index
   
