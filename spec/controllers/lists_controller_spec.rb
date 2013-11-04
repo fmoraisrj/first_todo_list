@@ -9,8 +9,9 @@ describe ListsController do
 
   let(:user) { User.new({
                           :_id => "525ea17c623571e3f7000003",
-                          :email => "felipe@mtodolist.com",
-                          :username => "Felipe"
+                          :email => "felipe@todolist.com",
+                          :username => "user_test",
+                          :password => "12345678"
                         })
   }
 
@@ -28,7 +29,10 @@ describe ListsController do
   before :each do
     new_list.id = id
     List.stub(:find).and_return(new_list) 
-    User.create(user)
+    @request.env["devise.mapping"] = Devise.mappings[:user]
+    u = user 
+    u.save!
+    sign_in u
   end
 
   describe "GET #index" do
@@ -45,8 +49,8 @@ describe ListsController do
     # end
 
     it "deveria ser um array" do
-      sign_in user
-      debugger
+      # sign_in user
+      # debugger
       get :index
 
       assigns(:lists).should be_an_instance_of Array
