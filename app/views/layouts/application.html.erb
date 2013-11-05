@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>mTodoList</title>
+  <title>mTodo List</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   
@@ -13,9 +13,9 @@
       <div class="navbar">
         <div class="navbar-inner">
           <% if user_signed_in? %>
-            <%= link_to "mTodo list", lists_path , class: "brand" %>
+            <%= link_to "mTodo List", lists_path , class: "brand" %>
           <% else %>
-            <%= link_to "mTodo list", root_path , class: "brand" %>
+            <%= link_to "mTodo List", root_path , class: "brand" %>
           <% end %>
           <ul class="nav"> 
             <% if user_signed_in? %>

@@ -19,8 +19,9 @@
   <p>
     
     <%= f.text_field :name_list, autofocus: true, :placeholder => "Name list" %>
-    <br />
-    <%= f.submit :Save, :class => "btn btn-large btn-primary" %>
+    <div>
+      <%= f.submit :Save, :class => "btn btn-large btn-primary" %>
+    </div>
   </p>
   <%= link_to 'Back', lists_path %>
 <% end %>
